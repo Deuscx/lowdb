@@ -1,5 +1,5 @@
 {
-  "name": "lowdb",
+  "name": "lowdb-cjs",
   "version": "3.0.0",
   "description": "Tiny local JSON database for Node, Electron and the browser",
   "keywords": [
@@ -15,19 +15,18 @@
     "browser",
     "esm"
   ],
-  "homepage": "https://github.com/typicode/lowdb#readme",
+  "homepage": "https://github.com/Deuscx/lowdb#readme",
   "bugs": {
-    "url": "https://github.com/typicode/lowdb/issues"
+    "url": "https://github.com/Deuscx/lowdb/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/typicode/lowdb.git"
+    "url": "git+https://github.com/Deuscx/lowdb.git"
   },
   "funding": "https://github.com/sponsors/typicode",
   "license": "MIT",
-  "author": "Typicode <typicode@gmail.com>",
   "type": "module",
-  "exports": "./lib/index.js",
+  "main": "./index.cjs.js",
   "types": "lib",
   "files": [
     "lib",
@@ -39,10 +38,11 @@
   "scripts": {
     "test": "npm run build && xv lib",
     "lint": "eslint src --ext .ts --ignore-path .gitignore",
-    "build": "del-cli lib && tsc",
+    "build": "del-cli lib && npm run rollup:build",
     "prepublishOnly": "npm run build",
     "postversion": "git push && git push --tags && npm publish",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "rollup:build": "rollup --config rollup.config.ts --configPlugin typescript"
   },
   "dependencies": {
     "steno": "^2.1.0"
@@ -51,13 +51,17 @@
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@commitlint/prompt-cli": "^13.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
     "@sindresorhus/tsconfig": "^2.0.0",
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.9.1",
+    "@types/rollup": "^0.54.0",
     "@typicode/eslint-config": "^0.1.2",
     "del-cli": "^4.0.1",
     "husky": "^7.0.2",
     "lodash": "^4.17.21",
+    "rollup": "^2.60.1",
     "tempy": "^2.0.0",
     "typescript": "^4.4.3",
     "xv": "^1.0.2"
